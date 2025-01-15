@@ -42,4 +42,3 @@ The dashboard consists of **three interactive pages**, each providing unique ins
 ## **Acknowledgments**  
 - **Anudip Foundation** for training and guidance in Power BI.  
 
-Feel free to explore and modify this project to suit your needs! 😊  
