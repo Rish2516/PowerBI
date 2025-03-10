@@ -1,0 +1,1211 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\ndesc library_db.issued_status;\n-- Adding foreign key using alter \n\nALTER TABLE library_db.issued_status\nADD FOREIGN KEY (issued_member_id)\nreferences members(member_id);\n-- CRUD Operations\n-- Task 1. Create a New Book Record \n-- \"978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')\"\n\nINSERT INTO books(isbn, book_title, category, rental_price, status, author, publisher)\nVALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.');\n\nselect * from books;\n\n\n-- Task 2: Update an Existing Member's Address\n\nUPDATE members\nSET member_address = '125 Oak St'\nWHERE member_id = 'C103';\n-- Task 3: Delete a Record from the Issued Status Table \n-- Objective: Delete the record with issued_id = 'IS121' from the issued_status table.\n\ndelete from issued_status\nWHERE issued_id = 'IS121';\n-- Task 4: Retrieve All Books Issued by a Specific Employee \n-- Objective: Select all books issued by the employee with emp_id = 'E101'.\n\nSELECT * FROM issued_status\nWHERE issued_emp_id = 'E101'\n\n-- Task 5: List Members Who Have Issued More Than One Book \n-- Objective: Use GROUP BY to find members who have issued more than one book.\n\nselect issued_emp_id, count(*) as \"Total Issued\"\nfrom issued_status\nGROUP BY issued_emp_id\nHAVING COUNT(*)>1;\n-- issued_emp_id",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 35,
+                    "column": 22
+                },
+                "position": {
+                    "lineNumber": 35,
+                    "column": 22
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 34,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 114
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2a2c4d55-f907-4cc2-e4cc-67af9e7eae85"
+                    ]
+                },
+                "currentHeight": 271.796875,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 30
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "1",
+                    "resultId": "2a2c4d55-f907-4cc2-e4cc-67af9e7eae85",
+                    "rows": [
+                        {
+                            "0": "issued_id",
+                            "1": "varchar(10)",
+                            "2": "NO",
+                            "3": "PRI",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "issued_member_id",
+                            "1": "varchar(30)",
+                            "2": "YES",
+                            "3": "MUL",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "issued_book_name",
+                            "1": "varchar(80)",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "issued_date",
+                            "1": "date",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "issued_book_isbn",
+                            "1": "varchar(50)",
+                            "2": "YES",
+                            "3": "MUL",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "issued_emp_id",
+                            "1": "varchar(10)",
+                            "2": "YES",
+                            "3": "MUL",
+                            "4": null,
+                            "5": ""
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Field",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Type",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Null",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Key",
+                            "field": "3",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Default",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Extra",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 6 records retrieved in 69.541ms"
+                    },
+                    "totalRowCount": 6,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "desc library_db.issued_status",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 7,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "b65f8107-d676-41d7-be8a-e7938e61e3f0",
+                            "content": "OK, 35 rows affected in 1.7380387783050537s"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 138
+                        },
+                        "contentStart": 36,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 8,
+                "end": 17,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "6d02523f-2606-42d2-c36e-a2e0eed8a644",
+                        "43810123-ae51-43dc-a8fc-c4a8bddb8d3a"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 373
+                        },
+                        "contentStart": 170,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 373,
+                            "length": 22
+                        },
+                        "contentStart": 375,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 395,
+                            "length": 2
+                        },
+                        "contentStart": 394,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "1",
+                    "resultId": "6d02523f-2606-42d2-c36e-a2e0eed8a644",
+                    "rows": [
+                        {
+                            "0": "978-0-06-025492-6",
+                            "1": "Where the Wild Things Are",
+                            "2": "Children",
+                            "3": "3.50",
+                            "4": "yes",
+                            "5": "Maurice Sendak",
+                            "6": "HarperCollins"
+                        },
+                        {
+                            "0": "978-0-06-112008-4",
+                            "1": "To Kill a Mockingbird",
+                            "2": "Classic",
+                            "3": "5.00",
+                            "4": "yes",
+                            "5": "Harper Lee",
+                            "6": "J.B. Lippincott & Co."
+                        },
+                        {
+                            "0": "978-0-06-112241-5",
+                            "1": "The Kite Runner",
+                            "2": "Fiction",
+                            "3": "5.50",
+                            "4": "yes",
+                            "5": "Khaled Hosseini",
+                            "6": "Riverhead Books"
+                        },
+                        {
+                            "0": "978-0-06-440055-8",
+                            "1": "Charlotte's Web",
+                            "2": "Children",
+                            "3": "4.00",
+                            "4": "yes",
+                            "5": "E.B. White",
+                            "6": "Harper & Row"
+                        },
+                        {
+                            "0": "978-0-09-957807-9",
+                            "1": "A Game of Thrones",
+                            "2": "Fantasy",
+                            "3": "7.50",
+                            "4": "yes",
+                            "5": "George R.R. Martin",
+                            "6": "Bantam"
+                        },
+                        {
+                            "0": "978-0-14-027526-3",
+                            "1": "A Tale of Two Cities",
+                            "2": "Classic",
+                            "3": "4.50",
+                            "4": "yes",
+                            "5": "Charles Dickens",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-14-044930-3",
+                            "1": "The Histories",
+                            "2": "History",
+                            "3": "5.50",
+                            "4": "yes",
+                            "5": "Herodotus",
+                            "6": "Penguin Classics"
+                        },
+                        {
+                            "0": "978-0-14-118776-1",
+                            "1": "One Hundred Years of Solitude",
+                            "2": "Literary Fiction",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "Gabriel Garcia Marquez",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-14-143951-8",
+                            "1": "Pride and Prejudice",
+                            "2": "Classic",
+                            "3": "5.00",
+                            "4": "yes",
+                            "5": "Jane Austen",
+                            "6": "Penguin Classics"
+                        },
+                        {
+                            "0": "978-0-141-44171-6",
+                            "1": "Jane Eyre",
+                            "2": "Classic",
+                            "3": "4.00",
+                            "4": "yes",
+                            "5": "Charlotte Bronte",
+                            "6": "Penguin Classics"
+                        },
+                        {
+                            "0": "978-0-19-280551-1",
+                            "1": "The Guns of August",
+                            "2": "History",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "Barbara W. Tuchman",
+                            "6": "Oxford University Press"
+                        },
+                        {
+                            "0": "978-0-307-37840-1",
+                            "1": "The Alchemist",
+                            "2": "Fiction",
+                            "3": "2.50",
+                            "4": "yes",
+                            "5": "Paulo Coelho",
+                            "6": "HarperOne"
+                        },
+                        {
+                            "0": "978-0-307-58837-1",
+                            "1": "Sapiens: A Brief History of Humankind",
+                            "2": "History",
+                            "3": "8.00",
+                            "4": "no",
+                            "5": "Yuval Noah Harari",
+                            "6": "Harper Perennial"
+                        },
+                        {
+                            "0": "978-0-330-25864-8",
+                            "1": "Animal Farm",
+                            "2": "Classic",
+                            "3": "5.50",
+                            "4": "yes",
+                            "5": "George Orwell",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-345-39180-3",
+                            "1": "Dune",
+                            "2": "Science Fiction",
+                            "3": "8.50",
+                            "4": "yes",
+                            "5": "Frank Herbert",
+                            "6": "Ace"
+                        },
+                        {
+                            "0": "978-0-375-41398-8",
+                            "1": "The Diary of a Young Girl",
+                            "2": "History",
+                            "3": "6.50",
+                            "4": "no",
+                            "5": "Anne Frank",
+                            "6": "Bantam"
+                        },
+                        {
+                            "0": "978-0-375-50167-0",
+                            "1": "The Road",
+                            "2": "Dystopian",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "Cormac McCarthy",
+                            "6": "Vintage"
+                        },
+                        {
+                            "0": "978-0-385-33312-0",
+                            "1": "The Shining",
+                            "2": "Horror",
+                            "3": "6.00",
+                            "4": "yes",
+                            "5": "Stephen King",
+                            "6": "Doubleday"
+                        },
+                        {
+                            "0": "978-0-393-05081-8",
+                            "1": "A Peoples History of the United States",
+                            "2": "History",
+                            "3": "9.00",
+                            "4": "yes",
+                            "5": "Howard Zinn",
+                            "6": "Harper Perennial"
+                        },
+                        {
+                            "0": "978-0-393-91257-8",
+                            "1": "Guns, Germs, and Steel: The Fates of Human Societies",
+                            "2": "History",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "Jared Diamond",
+                            "6": "W. W. Norton & Company"
+                        },
+                        {
+                            "0": "978-0-451-52993-5",
+                            "1": "Fahrenheit 451",
+                            "2": "Dystopian",
+                            "3": "5.50",
+                            "4": "yes",
+                            "5": "Ray Bradbury",
+                            "6": "Ballantine Books"
+                        },
+                        {
+                            "0": "978-0-451-52994-2",
+                            "1": "Moby Dick",
+                            "2": "Classic",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "Herman Melville",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-452-28240-7",
+                            "1": "Brave New World",
+                            "2": "Dystopian",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "Aldous Huxley",
+                            "6": "Harper Perennial"
+                        },
+                        {
+                            "0": "978-0-525-47535-5",
+                            "1": "The Great Gatsby",
+                            "2": "Classic",
+                            "3": "8.00",
+                            "4": "yes",
+                            "5": "F. Scott Fitzgerald",
+                            "6": "Scribner"
+                        },
+                        {
+                            "0": "978-0-553-29698-2",
+                            "1": "The Catcher in the Rye",
+                            "2": "Classic",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "J.D. Salinger",
+                            "6": "Little, Brown and Company"
+                        },
+                        {
+                            "0": "978-0-553-57340-1",
+                            "1": "1984",
+                            "2": "Dystopian",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "George Orwell",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-670-81302-4",
+                            "1": "The Road",
+                            "2": "Dystopian",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "Cormac McCarthy",
+                            "6": "Knopf"
+                        },
+                        {
+                            "0": "978-0-679-64115-3",
+                            "1": "1984",
+                            "2": "Dystopian",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "George Orwell",
+                            "6": "Penguin Books"
+                        },
+                        {
+                            "0": "978-0-679-76489-8",
+                            "1": "Harry Potter and the Sorcerers Stone",
+                            "2": "Fantasy",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "J.K. Rowling",
+                            "6": "Scholastic"
+                        },
+                        {
+                            "0": "978-0-679-77644-3",
+                            "1": "Beloved",
+                            "2": "Fiction",
+                            "3": "6.50",
+                            "4": "yes",
+                            "5": "Toni Morrison",
+                            "6": "Knopf"
+                        },
+                        {
+                            "0": "978-0-7432-4722-4",
+                            "1": "The Da Vinci Code",
+                            "2": "Mystery",
+                            "3": "8.00",
+                            "4": "yes",
+                            "5": "Dan Brown",
+                            "6": "Doubleday"
+                        },
+                        {
+                            "0": "978-0-7432-4722-5",
+                            "1": "Angels & Demons",
+                            "2": "Mystery",
+                            "3": "7.50",
+                            "4": "yes",
+                            "5": "Dan Brown",
+                            "6": "Doubleday"
+                        },
+                        {
+                            "0": "978-0-7432-7356-4",
+                            "1": "The Hobbit",
+                            "2": "Fantasy",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "J.R.R. Tolkien",
+                            "6": "Houghton Mifflin Harcourt"
+                        },
+                        {
+                            "0": "978-0-7432-7357-1",
+                            "1": "1491: New Revelations of the Americas Before Columbus",
+                            "2": "History",
+                            "3": "6.50",
+                            "4": "no",
+                            "5": "Charles C. Mann",
+                            "6": "Vintage Books"
+                        },
+                        {
+                            "0": "978-0-7434-7679-3",
+                            "1": "The Stand",
+                            "2": "Horror",
+                            "3": "7.00",
+                            "4": "yes",
+                            "5": "Stephen King",
+                            "6": "Doubleday"
+                        },
+                        {
+                            "0": "978-1-60129-456-2",
+                            "1": "To Kill a Mockingbird",
+                            "2": "Classic",
+                            "3": "6.00",
+                            "4": "yes",
+                            "5": "Harper Lee",
+                            "6": "J.B. Lippincott & Co."
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "isbn",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "book_title",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "category",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "rental_price",
+                            "field": "3",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "status",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "author",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "publisher",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 36 records retrieved in 21.44ms"
+                    },
+                    "totalRowCount": 36,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 1,
+                    "sql": "\n\nselect * from books",
+                    "updatable": true,
+                    "fullTableName": "books"
+                },
+                {
+                    "tabId": "1",
+                    "resultId": "43810123-ae51-43dc-a8fc-c4a8bddb8d3a",
+                    "rows": [],
+                    "executionInfo": {
+                        "text": "OK, 1 row affected in 259.143ms",
+                        "type": 4
+                    },
+                    "totalRowCount": 0,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- CRUD Operations\n-- Task 1. Create a New Book Record \n-- \"978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')\"\n\nINSERT INTO books(isbn, book_title, category, rental_price, status, author, publisher)\nVALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 18,
+                "end": 22,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "4da92059-67d6-47f8-b034-fedeacdaf8bd",
+                            "content": "OK, 1 row affected in 150.873ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 122
+                        },
+                        "contentStart": 48,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 23,
+                "end": 27,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "9f821248-26aa-4b3f-91ed-18b8c36873bc",
+                            "content": "OK, 1 row affected in 45.35ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 197
+                        },
+                        "contentStart": 146,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 28,
+                "end": 33,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "485d6b7b-8c71-4ed8-cf2c-aa4332c24cf5"
+                    ]
+                },
+                "currentHeight": 157.390625,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 195
+                        },
+                        "contentStart": 138,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "1",
+                    "resultId": "485d6b7b-8c71-4ed8-cf2c-aa4332c24cf5",
+                    "rows": [
+                        {
+                            "0": "IS130",
+                            "1": "C106",
+                            "2": "Moby Dick",
+                            "3": "2024-04-03",
+                            "4": "978-0-451-52994-2",
+                            "5": "E101"
+                        },
+                        {
+                            "0": "IS131",
+                            "1": "C106",
+                            "2": "To Kill a Mockingbird",
+                            "3": "2024-04-04",
+                            "4": "978-0-06-112008-4",
+                            "5": "E101"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "issued_id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "issued_member_id",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "issued_book_name",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "issued_date",
+                            "field": "3",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "issued_book_isbn",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "issued_emp_id",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 69.894ms"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Task 4: Retrieve All Books Issued by a Specific Employee \n-- Objective: Select all books issued by the employee with emp_id = 'E101'.\n\nSELECT * FROM issued_status\nWHERE issued_emp_id = 'E101'\n",
+                    "updatable": true,
+                    "fullTableName": "issued_status"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 34,
+                "end": 40,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "73ae1bd6-afbd-41b2-d5b7-cdaf3fb23906"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 249
+                        },
+                        "contentStart": 140,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "1",
+                    "resultId": "73ae1bd6-afbd-41b2-d5b7-cdaf3fb23906",
+                    "rows": [
+                        {
+                            "0": "E101",
+                            "1": 2
+                        },
+                        {
+                            "0": "E102",
+                            "1": 2
+                        },
+                        {
+                            "0": "E104",
+                            "1": 4
+                        },
+                        {
+                            "0": "E105",
+                            "1": 4
+                        },
+                        {
+                            "0": "E106",
+                            "1": 6
+                        },
+                        {
+                            "0": "E107",
+                            "1": 3
+                        },
+                        {
+                            "0": "E108",
+                            "1": 4
+                        },
+                        {
+                            "0": "E109",
+                            "1": 2
+                        },
+                        {
+                            "0": "E110",
+                            "1": 6
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "issued_emp_id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Total Issued",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 9 records retrieved in 6.045ms"
+                    },
+                    "totalRowCount": 9,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Task 5: List Members Who Have Issued More Than One Book \n-- Objective: Use GROUP BY to find members who have issued more than one book.\nselect issued_emp_id, count(*) as \"Total Issued\"\nfrom issued_status\nGROUP BY issued_emp_id\nHAVING COUNT(*)>1",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 41,
+                "end": 41,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 16
+                        },
+                        "contentStart": 0,
+                        "state": 1
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
